@@ -1,8 +1,10 @@
+
 extends layout
 
 block content
+
   h1= title
-  p Welcome to #[em LocalLibrary], a very basic Express website developed as a tutorial example on the Mozilla Developer Network.
+  p Welcome to #[em LocalLibrary], a very basic Express website 
 
 
   h1 Dynamic content
@@ -19,3 +21,4 @@ block content
       li #[strong Copies available:] !{data.book_instance_available_count}
       li #[strong Authors:] !{data.author_count}
       li #[strong Genres:] !{data.genre_count}
+
