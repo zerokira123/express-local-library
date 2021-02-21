@@ -11,6 +11,9 @@ var catalogRouter = require('./routes/catalog');  //Import routes for "catalog" 
 var compression = require('compression');
 var helmet = require('helmet');
 
+const cookieSession = require('cookie-session')
+const passport = require('passport');
+require('./routes/passport-setup');
 var app = express();
 
 
@@ -40,6 +43,42 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/catalog', catalogRouter);  // Add catalog routes to middleware chain.
+
+app.use(cookieSession({
+  name: 'tuto-session',
+  keys: ['key1', 'key2']
+}))
+
+const isLoggedIn = (req, res, next) => {
+  if (req.user) {
+      next();
+  } else {
+      res.sendStatus(401);
+  }
+}
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+app.get('/failed', (req, res) => res.send('You Failed to log in!'))
+app.get('/good', isLoggedIn, (req, res) => res.redirect('/google'))
+
+app.get('/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/failed' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/catalog');
+  });
+
+  app.get('/logout', (req, res) => {
+    req.session = null;
+    req.logout();
+    res.redirect('/google');
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
