@@ -1,0 +1,20 @@
+doctype html
+html
+  head
+    title Node Authentication
+    link(rel='stylesheet' href='//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css')
+    link(rel='stylesheet' href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css')
+
+  body 
+
+    .col-sm-6
+      .well
+        h3.text-danger
+          span.fab.fa-google
+            |  Google
+        p
+          li #[strong Name :] !{name}
+          br
+          li #[strong Email:] !{email}
+          br
+          p welcome Admin  click this link to go #[a(href='/catalog') HomePage]

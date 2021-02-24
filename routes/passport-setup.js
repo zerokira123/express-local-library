@@ -10,20 +10,12 @@ passport.deserializeUser(function(user, done) {
     done(null, user);
   
 });
-
-passport.use(new GoogleStrategy({
-    clientID: "672844185204-bklbder3vmaut1hktqnbr5i5q5p3jgt3.apps.googleusercontent.com",
-    clientSecret: "EIWrJ85V_i61And_XApIt-CV",
-    callbackURL: "https://express-local-library-website.herokuapp.com/google/callback"
-  },
-  function(accessToken, refreshToken, profile, done) {
-
-      return done(null, profile);
-    
-  }
-));
-
-
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
 
 function onSignIn(googleUser) {
   // Useful data for your client-side scripts:
@@ -39,8 +31,15 @@ function onSignIn(googleUser) {
   var id_token = googleUser.getAuthResponse().id_token;
   console.log("ID Token: " + id_token);
 }
-
-exports.google = function(req, res) {
+passport.use(new GoogleStrategy({
+    clientID: "672844185204-bklbder3vmaut1hktqnbr5i5q5p3jgt3.apps.googleusercontent.com",
+    clientSecret: "EIWrJ85V_i61And_XApIt-CV",
+    callbackURL: "https://express-local-library-website.herokuapp.com/google/callback",
+    passReqToCallback:true
+  },
+  function(request, accessToken, refreshToken, profile, done) {
+      console.log(profile)
+      return done(null, profile);
     
-    res.render('google_12');
-  };
+  }
+));
