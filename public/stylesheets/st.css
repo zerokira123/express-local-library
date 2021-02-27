@@ -1,0 +1,25 @@
+body{
+    background-color: #0D1117;
+}
+.col-sm-6{
+    position: relative;
+    
+
+}
+.well{
+    background-color: #0D1117;
+    width: auto;
+    height: auto;
+    border-radius: 15px 50px;
+    border-style: groove;
+    border-color: #c9D1D9;
+    color: #c9D1D9;
+    list-style: none;
+    /* Center vertically and horizontally */
+    /* position: absolute;
+    top: 50%;
+    left: 50%; */
+    margin: 25% -70% 0 35%;
+    text-indent: 20px;
+
+}
