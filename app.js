@@ -57,6 +57,7 @@ const isLoggedIn = (req, res, next) => {
   }
 }
 
+
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -71,9 +72,10 @@ app.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/failed' }),
   function(req, res) {
     // Successful authentication, redirect home.
-    res.redirect('/catalog');
+    var name_id =req.user.displayName;
+    var email_id = req.user.emails[0].value;
+    res.render("profile",{name:name_id,pic:req.user.photos[0].value,email:email_id})
   });
-
   app.get('/logout', (req, res) => {
     req.session = null;
     req.logout();

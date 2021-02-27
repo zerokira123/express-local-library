@@ -17,7 +17,7 @@ passport.use(new GoogleStrategy({
     callbackURL: "https://express-local-library-website.herokuapp.com/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
-
+      console.log(profile)
       return done(null, profile);
     
   }
@@ -40,7 +40,9 @@ function onSignIn(googleUser) {
   console.log("ID Token: " + id_token);
 }
 
-exports.google = function(req, res) {
-    
-    res.render('google_12');
-  };
+function signOut() {
+  var auth2 = gapi.auth2.getAuthInstance();
+  auth2.signOut().then(function () {
+    console.log('User signed out.');
+  });
+}
