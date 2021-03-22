@@ -2,11 +2,13 @@ extends layout
 
 block content
   h1= title
-  
-  ul
-  each val in list_genres
-    li 
-      a(href=val.url) #{val.name}
+  table(style=border='1')
+    tr 
+      th Genres
+      each val in list_genres
+        tr
+          td
+            a(href=val.url) #{val.name}
 
-  else
-    li There are no genre.
+      else
+        li There are no genre.

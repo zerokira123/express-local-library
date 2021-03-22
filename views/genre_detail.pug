@@ -7,15 +7,21 @@ block content
   div(style='margin-left:20px;margin-top:20px')
 
     h4 Books
-    
-    dl
-    each book in genre_books
-      dt 
-        a(href=book.url) #{book.title}
-      dd #{book.summary}
+    table(style=border='1')
+      tr 
+        th Title
+        th Description
+      dl
+      each book in genre_books
+        tr 
+          td
+            dt 
+              a(href=book.url) #{book.title}   
+          td
+            dd #{book.summary}
 
-    else
-      p This genre has no books.
+      else
+        p This genre has no books.
       
   hr
   p

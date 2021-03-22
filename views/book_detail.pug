@@ -15,23 +15,36 @@ block content
   
   div(style='margin-left:20px;margin-top:20px')
     h4 Copies
-    
-    each val in book_instances
-      hr
-      if val.status=='Available'
-        p.text-success #{val.status}
-      else if val.status=='Maintenance'
-        p.text-danger #{val.status}
-      else
-        p.text-warning #{val.status} 
-      p #[strong Imprint:] #{val.imprint}
-      if val.status!='Available'
-        p #[strong Due back:] #{val.due_back}
-      p #[strong Id:] 
-        a(href=val.url) #{val._id}
- 
-    else
-      p There are no copies of this book in the library.
+    table(style=border='1')
+      tr 
+        th ID
+        th Publisher
+        th Booking Detail
+        th Due 
+        each val in book_instances
+          tr 
+            td
+              hr
+              p 
+                a(href=val.url) #{val._id}
+            td
+              p #[strong Imprint:] #{val.imprint}
+            td
+              if val.status=='Available'
+                p.text-success #{val.status}
+              else if val.status=='Maintenance'
+                p.text-danger #{val.status}
+              else
+                p.text-warning #{val.status} 
+            td
+              if val.status!='Available'
+                p #{val.due_back}
+              else
+                p NO DUE
+
+        
+        else
+          p There are no copies of this book in the library.
       
   hr
   p

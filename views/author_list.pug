@@ -4,10 +4,16 @@ block content
   h1= title
   
   ul
-  each author in author_list
-    li 
-      a(href=author.url) #{author.name} 
-      | (#{author.lifespan})
+  table(style=border='1')
+    tr 
+      th Author Name
+      th Author Lifespan
+    each author in author_list
+      tr
+        td
+          a(href=author.url) #{author.name} 
+        td
+          | (#{author.lifespan})
 
-  else
-    li There are no authors.
+    else
+      li There are no authors.

@@ -2,7 +2,7 @@ body{
     background-color: #0D1117;
 }
 .col-sm-6{
-    position: relative;
+    position: fixed;
     
 
 }
@@ -20,6 +20,6 @@ body{
     top: 50%;
     left: 50%; */
     margin: 25% -70% 0 35%;
-    text-indent: 20px;
+    text-indent: 40px;
 
 }
